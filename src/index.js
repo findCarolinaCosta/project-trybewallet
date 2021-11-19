@@ -4,11 +4,17 @@ import { BrowserRouter } from 'react-router-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import { Provider } from 'react-redux';
+import store from './store';
 
+/* Adiciona provider e BrowserRouter no index do diretório src para que nos teste seja possível 
+mockar um store e rotas separadamente dos da aplicação*/
 ReactDOM.render(
-  <BrowserRouter>
-    <App />
-  </BrowserRouter>,
+  <Provider store={store}>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>,
+  </Provider>,
   document.getElementById('root'),
 );
 
