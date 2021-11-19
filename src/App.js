@@ -7,10 +7,12 @@ class App extends Component {
   render() {
     return (
       <Switch>
-        <Route exact path="/" component={Login} /> {/*cria rota para página de login */}
-        <Route path="/carteira" component={Wallet} /> {/* rota para página de wallet */}
+        {/* cria rota para página de login */}
+        <Route exact path="/" component={ Login } />
+        {/* rota para página de wallet */}
+        <Route path="/carteira" component={ Wallet } />
       </Switch>
-    ) // retante no index do src para que ao renderizar o app nos teste poder manipular rotas e store separadamente;
+    ); // retante no index do src para que ao renderizar o app nos teste poder manipular rotas e store separadamente;
   }
 }
 
