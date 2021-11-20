@@ -4,27 +4,8 @@ import PropTypes from 'prop-types';
 import ExpenseForm from './ExpenseForm';
 
 class Header extends Component {
-  constructor() {
-    super();
-    this.state = {
-      totalExpense: 0, // irá armazenar localmente o valor total das despesas
-    };
-    this.getTotal = this.getTotal.bind(this);
-  }
-
-  componentDidMount() {
-    this.getTotal();
-  }
-
-  getTotal() {
-    const { expenses } = this.props;
-    this.setState({ totalExpense: expenses });
-    console.log(expenses);
-  }
-
   render() {
-    const { totalExpense } = this.state;
-    const { email } = this.props;
+    const { email, totalExpense } = this.props;
     return (
       <>
         <div>
@@ -52,13 +33,12 @@ class Header extends Component {
 }
 const mapStateToProps = (state) => ({
   email: state.user.email,
-  expenses: state.wallet.arrayExpenses.reduce((prev, { expenseAmount }) => prev
-     + Number(expenseAmount), 0),
-}); // recupera o email do store
+  totalExpense: state.wallet.totalExpense,
+});
 
 export default connect(mapStateToProps)(Header);
 
 Header.propTypes = {
   email: PropTypes.string.isRequired,
-  expenses: PropTypes.arrayOf(PropTypes.object).isRequired,
+  totalExpense: PropTypes.number.isRequired,
 };
