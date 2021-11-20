@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { fetchCurrencyQuotes } from '../actions';
+import exchangeApiFetch from '../services/exchangeApiFetch';
 
 class ExpenseForm extends Component {
   constructor() {
@@ -11,15 +12,12 @@ class ExpenseForm extends Component {
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleClick = this.handleClick.bind(this);
+    this.getArrayExpenses = this.getArrayExpenses.bind(this);
   }
 
-  handleChange({ target }) {
-    const { name, value } = target;
-    this.setState({ [name]: value });
-  }
-
-  handleClick() {
+  async getArrayExpenses() {
     const { getExpensesArray } = this.props;
+    const currentExchange = await exchangeApiFetch();
     const {
       allExpenses,
       valueInput,
@@ -28,18 +26,28 @@ class ExpenseForm extends Component {
       paymentMethod,
       category,
     } = this.state;
-    const array = {
+    const obj = {
       id: allExpenses.length,
       expenseAmount: valueInput,
       description: descriptionInput,
       currency: currencyInput,
       method: paymentMethod,
       tag: category,
+      exchangeRates: currentExchange,
     };
-    allExpenses.push(array);
+    allExpenses.push(obj);
     this.setState({
       allExpenses,
     }, () => getExpensesArray(allExpenses));
+  }
+
+  handleChange({ target }) {
+    const { name, value } = target;
+    this.setState({ [name]: value });
+  }
+
+  handleClick() {
+    this.getArrayExpenses();
   }
 
   returnInputs() {
