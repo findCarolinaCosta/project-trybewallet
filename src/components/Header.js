@@ -4,8 +4,31 @@ import PropTypes from 'prop-types';
 import ExpenseForm from './ExpenseForm';
 
 class Header extends Component {
+  constructor() {
+    super();
+    this.state = {
+      totalExpense: 0, // irá armazenar localmente o valor total das despesas
+    };
+    this.getTotal = this.getTotal.bind(this);
+  }
+
+  componentDidUpdate(prevProps) {
+    const { totalExpenseProp } = this.props;
+    if (prevProps.totalExpenseProp !== totalExpenseProp
+      && totalExpenseProp !== undefined) {
+      this.getTotal();
+    }
+  }
+
+  getTotal() {
+    const { totalExpenseProp } = this.props;
+    this.setState({ totalExpense: totalExpenseProp });
+  }
+
   render() {
-    const { email, totalExpense } = this.props;
+    const { totalExpense } = this.state;
+    const { email, totalExpenseProp } = this.props;
+    console.log(totalExpenseProp);
     return (
       <>
         <div>
@@ -14,7 +37,7 @@ class Header extends Component {
           <p data-testid="total-field">
             Despesa total:
             {' '}
-            {totalExpense}
+            { totalExpense }
           </p>
           <label htmlFor="currency-field">
             <p>Cambio utilizado:</p>
@@ -33,12 +56,12 @@ class Header extends Component {
 }
 const mapStateToProps = (state) => ({
   email: state.user.email,
-  totalExpense: state.wallet.totalExpense,
+  totalExpenseProp: state.wallet.totalExpense,
 });
 
 export default connect(mapStateToProps)(Header);
 
 Header.propTypes = {
   email: PropTypes.string.isRequired,
-  totalExpense: PropTypes.number.isRequired,
+  totalExpenseProp: PropTypes.number.isRequired,
 };
