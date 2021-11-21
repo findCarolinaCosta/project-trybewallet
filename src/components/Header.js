@@ -9,26 +9,41 @@ class Header extends Component {
     this.state = {
       totalExpense: 0, // irá armazenar localmente o valor total das despesas
     };
-    this.getTotal = this.getTotal.bind(this);
+    this.setTotalFromProps = this.setTotalFromProps.bind(this);
   }
 
   componentDidUpdate(prevProps) {
-    const { totalExpenseProp } = this.props;
+    const { totalExpenseProp, expenses } = this.props;
     if (prevProps.totalExpenseProp !== totalExpenseProp
       && totalExpenseProp !== undefined) {
-      this.getTotal();
+      this.setTotalFromProps();
+    }
+    if (prevProps.expenses !== expenses) {
+      this.getTotalFromExpenses();
     }
   }
 
-  getTotal() {
+  setTotalFromProps() {
     const { totalExpenseProp } = this.props;
     this.setState({ totalExpense: totalExpenseProp });
   }
 
+  getTotalFromExpenses() {
+    const { expenses } = this.props;
+    let convertedTotal = 0;
+    expenses.forEach((expenseElem) => {
+      const { currency } = expenseElem;
+      convertedTotal += expenseElem.value * expenseElem.exchangeRates[currency].ask;
+    });
+    this.setState({
+      totalExpense: convertedTotal.toFixed(2),
+    });
+  } // fonte: Requisito 4 do Leandro Oliveira - Turma 15 - Tribo b;
+
   render() {
     const { totalExpense } = this.state;
-    const { email, totalExpenseProp } = this.props;
-    console.log(totalExpenseProp);
+    const { email } = this.props;
+
     return (
       <>
         <div>
@@ -57,6 +72,7 @@ class Header extends Component {
 const mapStateToProps = (state) => ({
   email: state.user.email,
   totalExpenseProp: state.wallet.totalExpense,
+  expenses: state.wallet.expenses,
 });
 
 export default connect(mapStateToProps)(Header);
@@ -64,4 +80,5 @@ export default connect(mapStateToProps)(Header);
 Header.propTypes = {
   email: PropTypes.string.isRequired,
   totalExpenseProp: PropTypes.number.isRequired,
+  expenses: PropTypes.arrayOf(PropTypes.object).isRequired,
 };

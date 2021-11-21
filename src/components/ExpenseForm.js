@@ -2,16 +2,26 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { fetchCurrencyQuotes } from '../actions';
+import exchangeApiFetch from '../services/exchangeApiFetch';
 
 class ExpenseForm extends Component {
   constructor() {
     super();
     this.state = {
       allExpenses: [],
+      arrCurrency: [],
+      expenseAmount: '',
+      method: '',
+      currency: 'USD',
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleClick = this.handleClick.bind(this);
     this.getArrayExpenses = this.getArrayExpenses.bind(this);
+    this.getOptionsCurrency = this.getOptionsCurrency.bind(this);
+  }
+
+  componentDidMount() {
+    this.getOptionsCurrency();
   }
 
   async getArrayExpenses() {
@@ -27,17 +37,33 @@ class ExpenseForm extends Component {
 
     const obj = {
       id: allExpenses.length,
-      expenseAmount,
+      value: expenseAmount,
       description,
       currency,
       method,
       tag,
       exchangeRates: {},
     };
-
+    allExpenses.push(obj);
     this.setState({
-      allExpenses: obj,
+      expenseAmount: '',
     }, () => getExpensesArray(obj));
+  }
+
+  /* Desenvolver lógica para criar dinamicamente os option do select do currency */
+  async getOptionsCurrency() {
+    const { arrCurrency } = this.state;
+    const response = await exchangeApiFetch();
+    Object.keys(response).forEach((item) => {
+      arrCurrency.push(item);
+    });
+  /* return (arrCurrency.map((elem) => (
+    <option
+      key={ elem }
+      value={ elem }
+    >
+      {elem}
+    </option>))); */
   }
 
   handleChange({ target }) {
@@ -50,10 +76,12 @@ class ExpenseForm extends Component {
   }
 
   returnInputs() {
+    const { expenseAmount } = this.state;
     return (
       <>
         <input
           name="expenseAmount"
+          value={ expenseAmount }
           data-testid="value-input"
           placeholder="Valor da despesa"
           onChange={ this.handleChange }
@@ -64,13 +92,29 @@ class ExpenseForm extends Component {
           placeholder="Descrição da despesa"
           onChange={ this.handleChange }
         />
-        <input
+        <select
           name="currency"
           data-testid="currency-input"
-          placeholder="Moeda será registrada a despesa"
+          placeholder="Moeda que será registrada a despesa"
           onChange={ this.handleChange }
-        />
-
+        >
+          <option>USD </option>
+          <option>USDT</option>
+          <option>CAD</option>
+          <option>GBP</option>
+          <option>ARS</option>
+          <option>BTC</option>
+          <option>LTC</option>
+          <option>EUR</option>
+          <option>JPY</option>
+          <option>CHF</option>
+          <option>AUD</option>
+          <option>CNY</option>
+          <option>ILS</option>
+          <option>ETH</option>
+          <option>XRP</option>
+          <option>DOGE</option>
+        </select>
       </>
     );
   }
@@ -80,34 +124,29 @@ class ExpenseForm extends Component {
       <section>
         <form>
           {this.returnInputs()}
-          <label htmlFor="payment-method">
-            <p>Método de pagamento:</p>
-            <select
-              name="method"
-              id="payment-method"
-              data-testid="method-input"
-              onChange={ this.handleChange }
-            >
-              <option>Dinheiro</option>
-              <option>Cartão de crédito</option>
-              <option>Cartão de débito</option>
-            </select>
-          </label>
-          <label htmlFor="category">
-            <p>Categoria:</p>
-            <select
-              name="tag"
-              id="category"
-              data-testid="tag-input"
-              onChange={ this.handleChange }
-            >
-              <option>Alimentação</option>
-              <option>Lazer</option>
-              <option>Trabalho</option>
-              <option>Transporte</option>
-              <option>Saúde</option>
-            </select>
-          </label>
+          <select
+            name="method"
+            id="payment-method"
+            data-testid="method-input"
+            onChange={ this.handleChange }
+          >
+            <option>Selecione</option>
+            <option>Dinheiro</option>
+            <option>Cartão de crédito</option>
+            <option>Cartão de débito</option>
+          </select>
+          <select
+            name="tag"
+            id="category"
+            data-testid="tag-input"
+            onChange={ this.handleChange }
+          >
+            <option>Alimentação</option>
+            <option>Lazer</option>
+            <option>Trabalho</option>
+            <option>Transporte</option>
+            <option>Saúde</option>
+          </select>
           <button
             type="button"
             onClick={ this.handleClick }

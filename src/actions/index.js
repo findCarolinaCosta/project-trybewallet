@@ -7,8 +7,8 @@ export const GET_EXPENSES = 'GET_EXPENSES';
 e o dito cujo email via action para o reducer do user para ser de fato salvo no store */
 export const saveEmailLogin = (email) => ({ type: LOGIN, email });
 
-export const getExpenses = (expenses) => ({
-  type: GET_EXPENSES, expenses });
+export const getExpenses = (expenses, response) => ({
+  type: GET_EXPENSES, expenses, response });
 
 export function fetchCurrencyQuotes(expenses) {
   return async (dispatch) => {

@@ -3,7 +3,7 @@ import { GET_EXPENSES } from '../actions';
 // state incial para o store
 const INITIAL_STATE = {
   expenses: [],
-  totalExpense: '',
+  totalExpense: 0,
 };
 
 function wallet(state = INITIAL_STATE, { type, expenses }) {
@@ -14,8 +14,8 @@ function wallet(state = INITIAL_STATE, { type, expenses }) {
       ...state,
       expenses: arrExpenses,
       totalExpense: expenses !== null
-        ? arrExpenses.reduce((prev, { expenseAmount }) => prev
-      + Number(expenseAmount), 0) : 0,
+        ? arrExpenses.reduce((prev, { value }) => prev
+      + Number(value), 0) : 0,
     };
   default:
     return state;
