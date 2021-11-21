@@ -72,19 +72,27 @@ class ExpenseForm extends Component {
     const { expenseAmount, arrCurrency } = this.state;
     return (
       <>
-        <input
-          name="expenseAmount"
-          value={ expenseAmount }
-          data-testid="value-input"
-          placeholder="Valor da despesa"
-          onChange={ this.handleChange }
-        />
-        <input
-          name="description"
-          data-testid="description-input"
-          placeholder="Descrição da despesa"
-          onChange={ this.handleChange }
-        />
+        <label htmlFor="expenseAmount">
+          Valor:
+          <input
+            name="expenseAmount"
+            id="expenseAmount"
+            value={ expenseAmount }
+            data-testid="value-input"
+            placeholder="Valor da despesa"
+            onChange={ this.handleChange }
+          />
+        </label>
+        <label htmlFor="description">
+          Descrição:
+          <input
+            name="description"
+            id="description"
+            data-testid="description-input"
+            placeholder="Descrição da despesa"
+            onChange={ this.handleChange }
+          />
+        </label>
         <label htmlFor="currency">
           Moeda:
           <select
@@ -114,29 +122,35 @@ class ExpenseForm extends Component {
       <section>
         <form>
           {this.returnInputs()}
-          <select
-            name="method"
-            id="payment-method"
-            data-testid="method-input"
-            onChange={ this.handleChange }
-          >
-            <option>Selecione</option>
-            <option>Dinheiro</option>
-            <option>Cartão de crédito</option>
-            <option>Cartão de débito</option>
-          </select>
-          <select
-            name="tag"
-            id="category"
-            data-testid="tag-input"
-            onChange={ this.handleChange }
-          >
-            <option>Alimentação</option>
-            <option>Lazer</option>
-            <option>Trabalho</option>
-            <option>Transporte</option>
-            <option>Saúde</option>
-          </select>
+          <label htmlFor="method">
+            Método de pagamento:
+            <select
+              name="method"
+              id="method"
+              data-testid="method-input"
+              onChange={ this.handleChange }
+            >
+              <option>Selecione</option>
+              <option>Dinheiro</option>
+              <option>Cartão de crédito</option>
+              <option>Cartão de débito</option>
+            </select>
+          </label>
+          <label htmlFor="tag">
+            Tag:
+            <select
+              name="tag"
+              id="tag"
+              data-testid="tag-input"
+              onChange={ this.handleChange }
+            >
+              <option>Alimentação</option>
+              <option>Lazer</option>
+              <option>Trabalho</option>
+              <option>Transporte</option>
+              <option>Saúde</option>
+            </select>
+          </label>
           <button
             type="button"
             onClick={ this.handleClick }
