@@ -3,18 +3,18 @@ import { GET_EXPENSES } from '../actions';
 // state incial para o store
 const INITIAL_STATE = {
   expenses: [],
-  totalExpense: 0,
+  totalExpense: '',
 };
 
-function wallet(state = INITIAL_STATE, { type, expenses, currentExchange }) {
+function wallet(state = INITIAL_STATE, { type, expenses }) {
+  const arrExpenses = [...state.expenses, expenses];
   switch (type) {
   case GET_EXPENSES:
     return {
       ...state,
-      expenses,
-      currentExchange,
+      expenses: arrExpenses,
       totalExpense: expenses !== null
-        ? expenses.reduce((prev, { expenseAmount }) => prev
+        ? arrExpenses.reduce((prev, { expenseAmount }) => prev
       + Number(expenseAmount), 0) : 0,
     };
   default:

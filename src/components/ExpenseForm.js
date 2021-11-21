@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { fetchCurrencyQuotes } from '../actions';
-import exchangeApiFetch from '../services/exchangeApiFetch';
 
 class ExpenseForm extends Component {
   constructor() {
@@ -17,28 +16,28 @@ class ExpenseForm extends Component {
 
   async getArrayExpenses() {
     const { getExpensesArray } = this.props;
-    const currentExchange = await exchangeApiFetch();
     const {
       allExpenses,
-      valueInput,
-      descriptionInput,
-      currencyInput,
-      paymentMethod,
-      category,
+      expenseAmount,
+      description,
+      currency,
+      method,
+      tag,
     } = this.state;
+
     const obj = {
       id: allExpenses.length,
-      expenseAmount: valueInput,
-      description: descriptionInput,
-      currency: currencyInput,
-      method: paymentMethod,
-      tag: category,
-      exchangeRates: currentExchange,
+      expenseAmount,
+      description,
+      currency,
+      method,
+      tag,
+      exchangeRates: {},
     };
-    allExpenses.push(obj);
+
     this.setState({
-      allExpenses,
-    }, () => getExpensesArray(allExpenses));
+      allExpenses: obj,
+    }, () => getExpensesArray(obj));
   }
 
   handleChange({ target }) {
@@ -54,19 +53,19 @@ class ExpenseForm extends Component {
     return (
       <>
         <input
-          name="valueInput"
+          name="expenseAmount"
           data-testid="value-input"
           placeholder="Valor da despesa"
           onChange={ this.handleChange }
         />
         <input
-          name="descriptionInput"
+          name="description"
           data-testid="description-input"
           placeholder="Descrição da despesa"
           onChange={ this.handleChange }
         />
         <input
-          name="currencyInput"
+          name="currency"
           data-testid="currency-input"
           placeholder="Moeda será registrada a despesa"
           onChange={ this.handleChange }
@@ -84,7 +83,7 @@ class ExpenseForm extends Component {
           <label htmlFor="payment-method">
             <p>Método de pagamento:</p>
             <select
-              name="paymentMethod"
+              name="method"
               id="payment-method"
               data-testid="method-input"
               onChange={ this.handleChange }
@@ -97,7 +96,7 @@ class ExpenseForm extends Component {
           <label htmlFor="category">
             <p>Categoria:</p>
             <select
-              name="category"
+              name="tag"
               id="category"
               data-testid="tag-input"
               onChange={ this.handleChange }
