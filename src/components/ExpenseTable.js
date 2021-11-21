@@ -21,18 +21,18 @@ function ExpenseTable({ expenses }) {
       <tbody>
         {expenses.map(({ id, value,
           description, currency, method, tag, exchangeRates }) => {
-          const exchange = exchangeRates[currency].name;
-          const convertedValue = Number(exchangeRates[currency].ask).toFixed(2);
-          const conversionCurrency = Number(value
+          const conversionCurrency = exchangeRates[currency].name;
+          const exchange = Number(exchangeRates[currency].ask).toFixed(2);
+          const convertedValue = Number(value
              * exchangeRates[currency].ask).toFixed(2);
 
           return (
             <tr key={ id }>
               <td>{value}</td>
-              <td>{currency}</td>
+              <td>{conversionCurrency}</td>
               <td>{exchange}</td>
               <td>{convertedValue}</td>
-              <td>{conversionCurrency}</td>
+              <td>Real</td>
               <td>{description}</td>
               <td>{method}</td>
               <td>{tag}</td>
