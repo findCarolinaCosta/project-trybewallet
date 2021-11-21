@@ -50,20 +50,13 @@ class ExpenseForm extends Component {
     }, () => getExpensesArray(obj));
   }
 
-  /* Desenvolver lógica para criar dinamicamente os option do select do currency */
+  /* cria dinamicamente os option do select do currency */
   async getOptionsCurrency() {
     const { arrCurrency } = this.state;
     const response = await exchangeApiFetch();
-    Object.keys(response).forEach((item) => {
-      arrCurrency.push(item);
-    });
-  /* return (arrCurrency.map((elem) => (
-    <option
-      key={ elem }
-      value={ elem }
-    >
-      {elem}
-    </option>))); */
+    Object.keys(response).forEach((item) => (item !== 'USDT'
+      ? arrCurrency.push(item) : null));
+    this.setState({ arrCurrency });
   }
 
   handleChange({ target }) {
@@ -76,7 +69,7 @@ class ExpenseForm extends Component {
   }
 
   returnInputs() {
-    const { expenseAmount } = this.state;
+    const { expenseAmount, arrCurrency } = this.state;
     return (
       <>
         <input
@@ -92,29 +85,26 @@ class ExpenseForm extends Component {
           placeholder="Descrição da despesa"
           onChange={ this.handleChange }
         />
-        <select
-          name="currency"
-          data-testid="currency-input"
-          placeholder="Moeda que será registrada a despesa"
-          onChange={ this.handleChange }
-        >
-          <option>USD </option>
-          <option>USDT</option>
-          <option>CAD</option>
-          <option>GBP</option>
-          <option>ARS</option>
-          <option>BTC</option>
-          <option>LTC</option>
-          <option>EUR</option>
-          <option>JPY</option>
-          <option>CHF</option>
-          <option>AUD</option>
-          <option>CNY</option>
-          <option>ILS</option>
-          <option>ETH</option>
-          <option>XRP</option>
-          <option>DOGE</option>
-        </select>
+        <label htmlFor="currency">
+          Moeda:
+          <select
+            name="currency"
+            id="currency"
+            data-testid="currency-input"
+            placeholder="Moeda que será registrada a despesa"
+            onChange={ this.handleChange }
+          >
+            {arrCurrency.map((elem) => (
+              <option
+                data-testid={ elem }
+                key={ elem }
+                value={ elem }
+              >
+                {elem}
+              </option>
+            ))}
+          </select>
+        </label>
       </>
     );
   }
