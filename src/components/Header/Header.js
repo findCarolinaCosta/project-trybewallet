@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import ExpenseForm from './ExpenseForm';
+import ExpenseForm from '../ExpenseForm';
+import HeadeInfoRight from './HeadeInfoRight';
+import './Header.css';
 
 class Header extends Component {
   constructor() {
@@ -45,29 +47,16 @@ class Header extends Component {
   render() {
     const { totalExpense } = this.state;
     const { email } = this.props;
-
     return (
-      <>
-        <div>
+      <header>
+        <div className="container">
           <h1>Teste</h1>
-          <p data-testid="email-field">{email}</p>
-          <p data-testid="total-field">
-            Despesa total:
-            {' '}
-            { totalExpense }
-          </p>
-          <label htmlFor="currency-field">
-            <p>Cambio utilizado:</p>
-            <select
-              id="currency-field"
-              data-testid="header-currency-field"
-            >
-              <option>BRL</option>
-            </select>
-          </label>
+          <div className="header-right">
+            <HeadeInfoRight props={ { email, totalExpense } } />
+          </div>
         </div>
         <ExpenseForm />
-      </>
+      </header>
     );
   }
 }
