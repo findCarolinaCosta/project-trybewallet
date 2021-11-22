@@ -1,10 +1,10 @@
 form {
-  display: flex;
   align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
   background-color: rgb(175, 175, 175);
+  display: flex;
+  flex-wrap: wrap;
   gap: 30px;
+  justify-content: center;
   padding: 30px;
 }
 
@@ -13,10 +13,10 @@ select {
 }
 
 .label {
-  width: 100%;
-  display: flex;
   align-items: center;
+  display: flex;
   gap: 10px;
+  width: 100%;
 }
 
 .label-description {
@@ -24,13 +24,13 @@ select {
 }
 
 .select {
-  display: flex;
   align-items: center;
+  display: flex;
   gap: 10px;
 }
 
 .div-alinhar-verticalmente {
+  align-items: center ! important;
   display: flex;
-  align-items: center !important;
   justify-content: center;
 }
