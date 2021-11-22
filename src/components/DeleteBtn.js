@@ -5,10 +5,7 @@ import { setUpdateExpenses } from '../actions';
 
 function DeleteBtn({ id, expenses, setUpdateExpensesProp }) {
   const deleteItem = (idItem) => {
-    const updateExpenses = expenses.filter((item) => (item.id === idItem
-      ? expenses.forEach((elem) => {
-        if (elem.id === idItem) delete expenses[idItem];
-      }) : expenses));
+    const updateExpenses = expenses.filter((item) => item.id !== idItem);
     setUpdateExpensesProp(updateExpenses);
   };
 

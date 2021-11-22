@@ -44,6 +44,6 @@ function InputsValueAndDescription({ expenseAmount, handleChange }) {
 export default InputsValueAndDescription;
 
 InputsValueAndDescription.propTypes = {
-  expenseAmount: PropTypes.number.isRequired,
+  expenseAmount: PropTypes.string.isRequired,
   handleChange: PropTypes.func.isRequired,
 };
