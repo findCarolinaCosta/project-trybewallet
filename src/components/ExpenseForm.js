@@ -8,7 +8,6 @@ class ExpenseForm extends Component {
   constructor() {
     super();
     this.state = {
-      allExpenses: [],
       arrCurrency: [],
       expenseAmount: '',
       method: '',
@@ -25,9 +24,8 @@ class ExpenseForm extends Component {
   }
 
   async getArrayExpenses() {
-    const { getExpensesArray } = this.props;
+    const { getExpensesArray, expenses } = this.props;
     const {
-      allExpenses,
       expenseAmount,
       description,
       currency,
@@ -36,7 +34,7 @@ class ExpenseForm extends Component {
     } = this.state;
 
     const obj = {
-      id: allExpenses.length,
+      id: expenses.length,
       value: expenseAmount,
       description,
       currency,
@@ -44,7 +42,6 @@ class ExpenseForm extends Component {
       tag,
       exchangeRates: {},
     };
-    allExpenses.push(obj);
     this.setState({
       expenseAmount: '',
     }, () => getExpensesArray(obj));
@@ -163,12 +160,15 @@ class ExpenseForm extends Component {
   }
 }
 
+const mapStateToProps = (state) => ({ expenses: state.wallet.expenses });
+
 const mapDispatchToProps = (dispatch) => ({
   getExpensesArray: (arrayExpenses) => dispatch(fetchCurrencyQuotes(arrayExpenses)),
 });
 
-export default connect(null, mapDispatchToProps)(ExpenseForm);
+export default connect(mapStateToProps, mapDispatchToProps)(ExpenseForm);
 
 ExpenseForm.propTypes = {
   getExpensesArray: PropTypes.func.isRequired,
+  expenses: PropTypes.arrayOf(PropTypes.object).isRequired,
 };

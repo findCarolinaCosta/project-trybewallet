@@ -30,7 +30,6 @@ class Header extends Component {
 
   getTotalFromExpenses() {
     const { expenses } = this.props;
-    // console.log(expenses, 'header');
     let convertedTotal = 0;
     expenses.forEach((expenseElem) => {
       const { currency } = expenseElem;
