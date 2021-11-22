@@ -30,7 +30,7 @@ select {
 }
 
 .div-alinhar-verticalmente {
-  align-items: center ! important;
+  align-items: center;
   display: flex;
   justify-content: center;
 }
