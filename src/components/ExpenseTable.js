@@ -5,7 +5,7 @@ import DeleteBtn from './DeleteBtn';
 
 function ExpenseTable({ expenses }) {
   return (
-    <table>
+    <table className="table table-striped">
       <thead>
         <tr>
           <th>Valor</th>
