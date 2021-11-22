@@ -30,10 +30,13 @@ class Header extends Component {
 
   getTotalFromExpenses() {
     const { expenses } = this.props;
+    // console.log(expenses, 'header');
     let convertedTotal = 0;
     expenses.forEach((expenseElem) => {
       const { currency } = expenseElem;
-      convertedTotal += expenseElem.value * expenseElem.exchangeRates[currency].ask;
+      const settingTotal = currency !== undefined ? convertedTotal
+       += expenseElem.value * expenseElem.exchangeRates[currency].ask : null;
+      return settingTotal;
     });
     this.setState({
       totalExpense: convertedTotal.toFixed(2),

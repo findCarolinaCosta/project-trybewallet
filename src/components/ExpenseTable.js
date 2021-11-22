@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import DeleteBtn from './DeleteBtn';
 
 function ExpenseTable({ expenses }) {
   return (
@@ -21,11 +22,12 @@ function ExpenseTable({ expenses }) {
       <tbody>
         {expenses.map(({ id, value,
           description, currency, method, tag, exchangeRates }) => {
-          const conversionCurrency = exchangeRates[currency].name;
-          const exchange = Number(exchangeRates[currency].ask).toFixed(2);
-          const convertedValue = Number(value
-             * exchangeRates[currency].ask).toFixed(2);
-
+          const conversionCurrency = exchangeRates !== undefined
+            ? exchangeRates[currency].name : null;
+          const exchange = exchangeRates !== undefined
+            ? Number(exchangeRates[currency].ask).toFixed(2) : null;
+          const convertedValue = exchangeRates !== undefined ? Number(value
+              * exchangeRates[currency].ask).toFixed(2) : null;
           return (
             <tr key={ id }>
               <td>{value}</td>
@@ -38,10 +40,9 @@ function ExpenseTable({ expenses }) {
               <td>{tag}</td>
               <td>
                 <button type="button">Editar</button>
-                <button type="button">Excluir</button>
+                <DeleteBtn id={ id } />
               </td>
             </tr>
-
           );
         }) }
       </tbody>
