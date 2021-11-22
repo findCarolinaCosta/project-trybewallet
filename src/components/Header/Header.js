@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import ExpenseForm from '../ExpenseForm';
 import HeadeInfoRight from './HeadeInfoRight';
+import ExpenseForm from '../ExpensesComponents/ExpenseForm';
 import './Header.css';
 
 class Header extends Component {
@@ -48,15 +48,18 @@ class Header extends Component {
     const { totalExpense } = this.state;
     const { email } = this.props;
     return (
-      <header>
-        <div className="container">
-          <h1>Teste</h1>
-          <div className="header-right">
-            <HeadeInfoRight props={ { email, totalExpense } } />
+      <>
+        <header className="navbar navbar-expand-lg">
+          <div className="container">
+            <h1>Teste</h1>
+            <div className="header-right">
+              <HeadeInfoRight props={ { email, totalExpense } } />
+            </div>
           </div>
-        </div>
+        </header>
         <ExpenseForm />
-      </header>
+
+      </>
     );
   }
 }

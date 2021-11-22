@@ -1,13 +1,5 @@
 header {
-  position: fixed;
-}
-
-.container {
-  align-items: center;
-  background-color: rgb(167, 167, 167);
-  display: flex;
-  justify-content: space-between;
-  padding: 20px 60px 20px 30px;
+  background-color: rgb(226, 226, 226) !important;
 }
 
 .header-right {
