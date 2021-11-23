@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import DeleteBtn from './DeleteBtn';
+import EditBtn from './EditBtn';
 
 function ExpenseTable({ expenses }) {
   return (
@@ -36,7 +37,7 @@ function ExpenseTable({ expenses }) {
               <td>{method}</td>
               <td>{tag}</td>
               <td>
-                <button type="button">Editar</button>
+                <EditBtn idExpense={ id } />
                 <DeleteBtn id={ id } />
               </td>
             </tr>
