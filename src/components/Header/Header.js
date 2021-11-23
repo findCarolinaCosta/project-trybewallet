@@ -4,10 +4,11 @@ import PropTypes from 'prop-types';
 import HeaderInfoRight from './HeadeInfoRight';
 import ExpenseForm from '../ExpensesComponents/ExpenseForm';
 import './Header.css';
+import EditExpenseForm from '../EditExpenseForm';
 
 class Header extends Component {
   render() {
-    const { email, expenses } = this.props;
+    const { email, expenses, editForm } = this.props;
     return (
       <>
         <header className="navbar navbar-expand-lg">
@@ -20,8 +21,7 @@ class Header extends Component {
             </div>
           </div>
         </header>
-        <ExpenseForm />
-
+        {editForm ? <EditExpenseForm /> : <ExpenseForm />}
       </>
     );
   }
@@ -29,6 +29,7 @@ class Header extends Component {
 const mapStateToProps = (state) => ({
   email: state.user.email,
   expenses: state.wallet.expenses,
+  editForm: state.wallet.editForm,
 });
 
 export default connect(mapStateToProps)(Header);
@@ -36,4 +37,5 @@ export default connect(mapStateToProps)(Header);
 Header.propTypes = {
   email: PropTypes.string.isRequired,
   expenses: PropTypes.arrayOf(PropTypes.object).isRequired,
+  editForm: PropTypes.bool.isRequired,
 };

@@ -12,7 +12,7 @@ class ExpenseForm extends Component {
     super();
     this.state = {
       arrCurrency: [],
-      expenseAmount: '',
+      value: '',
       method: '',
       currency: 'USD',
     };
@@ -29,7 +29,7 @@ class ExpenseForm extends Component {
   async getArrayExpenses() {
     const { getExpensesArray, expenses } = this.props;
     const {
-      expenseAmount,
+      value,
       description,
       currency,
       method,
@@ -38,7 +38,7 @@ class ExpenseForm extends Component {
 
     const obj = {
       id: expenses.length,
-      value: expenseAmount,
+      value,
       description,
       currency,
       method,
@@ -46,7 +46,11 @@ class ExpenseForm extends Component {
       exchangeRates: {},
     };
     this.setState({
-      expenseAmount: '',
+      value: '',
+      description: '',
+      currency: 'USD',
+      method: 'Selecione',
+      tag: 'Selecione',
     }, () => getExpensesArray(obj));
   }
 
@@ -69,15 +73,20 @@ class ExpenseForm extends Component {
   }
 
   render() {
-    const { expenseAmount, arrCurrency } = this.state;
+    const { value, description, currency,
+      method, tag, arrCurrency } = this.state;
     return (
       <section className="container-form">
         <form className="form-expenses align-middle">
           <InputsValueAndDescription
-            expenseAmount={ expenseAmount }
+            values={ { value, description } }
             handleChange={ this.handleChange }
           />
-          <SelectsOption arrCurrency={ arrCurrency } handleChange={ this.handleChange } />
+          <SelectsOption
+            arrCurrency={ arrCurrency }
+            values={ { currency, method, tag } }
+            handleChange={ this.handleChange }
+          />
           <div>
             <button
               type="button"
@@ -102,6 +111,6 @@ const mapDispatchToProps = (dispatch) => ({
 export default connect(mapStateToProps, mapDispatchToProps)(ExpenseForm);
 
 ExpenseForm.propTypes = {
-  getExpensesArray: PropTypes.func.isRequired,
   expenses: PropTypes.arrayOf(PropTypes.object).isRequired,
+  getExpensesArray: PropTypes.func.isRequired,
 };

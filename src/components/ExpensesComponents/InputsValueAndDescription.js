@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-function InputsValueAndDescription({ expenseAmount, handleChange }) {
+function InputsValueAndDescription({ objectInfos, handleChange,
+  values: { value, description } }) {
   return (
     <>
       <div className="div-alinhar-verticalmente">
@@ -12,9 +13,9 @@ function InputsValueAndDescription({ expenseAmount, handleChange }) {
           Valor:
           <input
             className="form-control"
-            name="expenseAmount"
+            name="value"
             id="expenseAmount"
-            value={ expenseAmount }
+            value={ objectInfos !== undefined ? objectInfos.value : value }
             data-testid="value-input"
             placeholder="Valor da despesa"
             onChange={ handleChange }
@@ -31,6 +32,7 @@ function InputsValueAndDescription({ expenseAmount, handleChange }) {
             className="form-control"
             name="description"
             id="description"
+            value={ objectInfos !== undefined ? objectInfos.description : description }
             data-testid="description-input"
             placeholder="Descrição da despesa"
             onChange={ handleChange }
@@ -44,6 +46,7 @@ function InputsValueAndDescription({ expenseAmount, handleChange }) {
 export default InputsValueAndDescription;
 
 InputsValueAndDescription.propTypes = {
-  expenseAmount: PropTypes.string.isRequired,
+  values: PropTypes.objectOf(PropTypes.string).isRequired,
+  objectInfos: PropTypes.objectOf(PropTypes.string).isRequired,
   handleChange: PropTypes.func.isRequired,
 };
