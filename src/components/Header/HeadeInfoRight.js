@@ -12,7 +12,7 @@ function HeaderInfoRight({ props: { email, expenses } }) {
   return (
     <>
       <p data-testid="email-field">{email}</p>
-      <p data-testid="total-field">
+      <p data-testid="total-field" className="total-field">
         Despesa total:
         {' '}
         {convertedTotal.toFixed(2)}

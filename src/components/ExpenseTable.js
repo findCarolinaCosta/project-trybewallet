@@ -6,7 +6,7 @@ import EditBtn from './EditBtn';
 
 function ExpenseTable({ expenses }) {
   return (
-    <table className="table table-striped">
+    <table className="table table-success table-striped">
       <thead>
         <tr>
           <th>Valor</th>

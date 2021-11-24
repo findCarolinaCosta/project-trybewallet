@@ -1,6 +1,7 @@
 form {
   align-items: center;
-  background-color: rgb(175, 175, 175);
+  background-color: rgb(0, 0, 0);
+  color: white;
   display: flex;
   flex-wrap: wrap;
   gap: 30px;
@@ -10,6 +11,11 @@ form {
 
 select {
   width: auto;
+}
+
+h1 {
+  text-align: center;
+  margin: 0;
 }
 
 .label {
@@ -33,4 +39,20 @@ select {
   align-items: center;
   display: flex;
   justify-content: center;
+}
+
+
+.btn {
+  text-decoration: none;
+}
+
+.container-header-left {
+  display: flex;
+  gap: 5px
+}
+
+.total-field {
+  font-size: 20px;
+  font-weight: bolder;
+  margin: 0;
 }

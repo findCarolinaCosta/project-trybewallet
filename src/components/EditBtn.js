@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { setObjToEdit } from '../actions';
+import editIcon from '../assets/edit-icon/1x/outline_edit_black_24dp.png';
 
 function EditBtn({ idExpense, expenses, dispatch }) {
   const handleClick = (idItem) => {
@@ -21,11 +22,12 @@ function EditBtn({ idExpense, expenses, dispatch }) {
   };
   return (
     <button
+      className="btn"
       type="button"
       data-testid="edit-btn"
       onClick={ () => handleClick(idExpense) }
     >
-      Editar
+      <img src={ editIcon } alt="" />
 
     </button>
   );

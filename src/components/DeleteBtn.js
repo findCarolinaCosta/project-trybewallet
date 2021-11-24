@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { setUpdateExpenses } from '../actions';
+import deleteIcon from '../assets/delete-icon/1x/outline_delete_forever_black_24dp.png';
 
 function DeleteBtn({ id, expenses, setUpdateExpensesProp }) {
   const deleteItem = (idItem) => {
@@ -11,11 +12,12 @@ function DeleteBtn({ id, expenses, setUpdateExpensesProp }) {
 
   return (
     <button
+      className="btn"
       type="button"
       data-testid="delete-btn"
       onClick={ () => deleteItem(id) }
     >
-      Excluir
+      <img src={ deleteIcon } alt="" />
 
     </button>
   );
