@@ -80,7 +80,7 @@ class Login extends React.Component {
               <input
                 className="input100 form-control"
                 data-testid="password-input"
-                type="text"
+                type="password"
                 name="password"
                 onChange={ this.handleChange }
               />
