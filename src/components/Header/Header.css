@@ -2,13 +2,13 @@ header {
   background-color: rgb(62, 163, 124);
 }
 
+p {
+  margin: auto;
+}
+
 .header-right {
   align-items: center;
   display: flex;
   gap: 30px;
   justify-content: flex-end;
-}
-
-p {
-  margin: auto;
 }
