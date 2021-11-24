@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router';
 import { saveEmailLogin } from '../actions';
+import '../styles/Login.css';
 
 class Login extends React.Component {
   constructor() {
@@ -55,31 +56,46 @@ class Login extends React.Component {
       return <Redirect to="/carteira" />;
     }
     return (
-      <div>
-        <h1>Login</h1>
-        <form>
-          <input
-            data-testid="email-input"
-            aria-label="email"
-            type="email"
-            name="email"
-            onChange={ this.handleChange }
-          />
-          <input
-            data-testid="password-input"
-            type="text"
-            name="password"
-            onChange={ this.handleChange }
-          />
-          <button
-            type="button"
-            disabled={ !this.getDisabled() }
-            onClick={ this.handleClick }
-          >
-            Entrar
-          </button>
-        </form>
-      </div>);
+      <div className="flex-login">
+        <div className="container-login">
+          <h1 className="login-h1">Login</h1>
+          <form className="login-form">
+            <div className="div-input">
+              <span className="txt1">Email</span>
+            </div>
+            <div className="wrap-input input-group label form-label mb-0">
+              <input
+                className="input100 form-control"
+                data-testid="email-input"
+                aria-label="email"
+                type="email"
+                name="email"
+                onChange={ this.handleChange }
+              />
+            </div>
+            <div className="div-input">
+              <span className="txt1">Password</span>
+            </div>
+            <div className="wrap-input input-group label form-label mb-0">
+              <input
+                className="input100 form-control"
+                data-testid="password-input"
+                type="text"
+                name="password"
+                onChange={ this.handleChange }
+              />
+            </div>
+            <button
+              type="button"
+              disabled={ !this.getDisabled() }
+              onClick={ this.handleClick }
+            >
+              Entrar
+            </button>
+          </form>
+        </div>
+      </div>
+    );
   }
 }
 

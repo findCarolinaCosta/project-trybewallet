@@ -1,0 +1,113 @@
+button {
+  align-items: center;
+  background-color: rgb(62, 163, 124);
+  border-radius: 10px;
+  border: none;
+  color: #fff;
+  display: flex;
+  font-family: Montserrat-SemiBold;
+  font-size: 20px;
+  height: 60px;
+  justify-content: center;
+  line-height: 1.2;
+  margin: 0;
+  padding: 0 20px;
+  position: relative;
+  transition: all .4s;
+  width: 100%;
+  z-index: 1;
+}
+
+button:hover {
+  cursor: pointer;
+}
+
+button:disabled {
+  background-color: #333;
+}
+
+
+.flex-login {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 0;
+  min-height: 100vh;
+  padding: 15px;
+  width: 100%;
+}
+
+.login-h1 {
+  font-family: Montserrat-SemiBold;
+}
+
+.container-login {
+  background: #fff;
+  border-radius: 10px;
+  box-sizing: border-box;
+  color: #212529;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  margin: 0;
+  padding-bottom: 33px;
+  padding-left: 110px;
+  padding-right: 110px;
+  padding-top: 62px;
+  position: relative;
+  width: 600px;
+}
+
+.login-form {
+  background-color: #fff;
+  box-sizing: border-box;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+.div-input {
+  color: #212529;
+  font-size: 20px ! important;
+  margin: 0;
+  padding: 0;
+}
+
+.wrap-input {
+  background-color: #f7f7f7;
+  border-radius: 10px;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  width: 100%;
+}
+
+.input100 {
+  background: 0 0;
+  color: #333;
+  display: block;
+  font-family: Poppins-Regular;
+  font-size: 20px;
+  height: 60px;
+  margin: 0;
+  padding: 0 20px;
+  width: 100%;
+}
+
+.txt1 {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-text-size-adjust: 100%;
+  box-sizing: border-box;
+  color: #555;
+  font-family: Montserrat-SemiBold;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1.5;
+  margin: 0;
+  padding: 0;
+}
