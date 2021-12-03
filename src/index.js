@@ -11,7 +11,7 @@ import store from './store';
 mockar um store e rotas separadamente dos da aplicação */
 ReactDOM.render(
   <Provider store={ store }>
-    <BrowserRouter>
+    <BrowserRouter basename={ process.env.PUBLIC_URL }>
       <App />
     </BrowserRouter>
   </Provider>,
