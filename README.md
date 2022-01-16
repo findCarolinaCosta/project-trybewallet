@@ -1,7 +1,7 @@
 # Project trybe wallet
 ## _Expense portfolio_
 
-[![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://findcarolinacosta.github.io/project-frontend-online-store/)
+[![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://findcarolinacosta.github.io/project-trybewallet/)
 
 Portfolio of expenses in the main currencies with current quotation.
 
